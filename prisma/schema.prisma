@@ -1,0 +1,24 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model images {
+  id          Int      @id @default(autoincrement())
+  user_uid    String   @db.VarChar
+  key_low     String   @db.VarChar
+  key_high    String   @db.VarChar
+  sha256      String   @db.VarChar
+  md5         String   @db.VarChar
+  isDuplicate Boolean  @default(false)
+  check_nu    Boolean  @default(false)
+  check_df    Boolean  @default(false)
+  check_dlib  Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now())
+}
